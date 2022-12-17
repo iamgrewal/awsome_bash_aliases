@@ -246,24 +246,6 @@ lastvalue='RET=$?; if [[ $RET -eq 0 ]]; then echo -ne "\033[0;32m$RET\033[0m ;)"
 #http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 function translate(){ wget -U "Mozilla/5.0" -qO - "http://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=$2&dt=t&q=$(echo $1 | sed "s/[\"'<>]//g")" | sed "s/,,,0]],,.*//g" | awk -F'"' '{print $2, $6}'; }
 
-#Prints (or creates if not there) a task list when a terminal is opened
-TASKFILE="$HOME/.bashtask" #Hidden for neatness
-NC='\033[0m' # No Color
-LIGHTRED='\e[1;31m'
-LIGHTBLUE='\e[1;34m'
-if [ -f "$TASKFILE" ] && [ $(stat -c %s "$TASKFILE") != 0 ] #Check if file has content
-then
-    echo -e "${LIGHTRED}Task List${NC} as of ${LIGHTBLUE}$(date -r "$TASKFILE")${NC}"
-    echo ""
-    cat "$TASKFILE"
-    printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' "-"
-else
-    echo "Yay! No tasks :)"
-    printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' "-"
-    touch "$TASKFILE"
-fi
-alias tasklist="bash"
-funX`
 #If you are encrypting/decrypting files using OpenSSL...
 function encrypt() { openssl smime -encrypt -binary -aes-256-cbc -in "$1" -out "$2" -outform DEM "$3" ; } #"$3" is path to public key
 function decrypt() { openssl smime -decrypt -in "$1" -binary -inform DEM -inkey "$2" ; } #"$2" is path to private key
