@@ -178,20 +178,7 @@ alias gri='git rebase --interactive'
 alias gcp='git cherry-pick'
 alias grm='git rm'
 
-# 'cd' to the most recently modified directory in $PWD
-cl()
-{
-        last_dir="$(ls -Frt | grep '/$' | tail -n1)"
-        if [ -d "$last_dir" ]; then
-                cd "$last_dir"
-        fi
-}
-
-# Directory bookmarking (one at a time)
-rd(){
-    pwd > "$HOME/.lastdir_$1"
-}
-
+ 
 crd(){
         lastdir="$(cat "$HOME/.lastdir_$1")">/dev/null 2>&1
         if [ -d "$lastdir" ]; then
