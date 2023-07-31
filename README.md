@@ -6,6 +6,6 @@ a suggestion or something needs corrected, let me know.  ~/.bashrc: executed by 
 Note: PS1 and umask are already set in /etc/profile. You should not  need this unless you want different defaults for root.
 
 wget https://raw.githubusercontent.com/iamgrewal/awsome_bash_aliases/main/bash_profile.sh
-sudo chmod +wrx ./bash_profule.sh
+sudo chmod +wrx ./bash_profile.sh
 sh ./bash_profile.sh
 
